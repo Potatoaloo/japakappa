@@ -24,3 +24,18 @@ if __name__ == "__main__":
 	k = [ encode_text(x) for x in k ]
 	v = [ encode_text(x) for x in v ]
 	genreName = dict(zip(k,v))
+#translating the columns from japanese to english.
+
+  files = ['coupon_list_train','coupon_list_test']
+
+  
+
+  for f in files:
+
+    df = pd.read_csv(path + f + '.csv')
+
+    df['CAPSULE_TEXT'] = [ capsuleText[encode_text(x)] for x in df['CAPSULE_TEXT'] ]
+
+    df['GENRE_NAME'] = [ genreName[encode_text(x)] for x in df['GENRE_NAME'] ]
+
+    df.to_csv(f + '_translated.csv',index = False)
